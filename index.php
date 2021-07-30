@@ -24,8 +24,8 @@
                 include('inc/connection.inc.php');
 
                 if (isset($_POST['refresh-button'])){
-                    $updateQuery = "SELECT * FROM `stores`";
-                    $execUpdate = $db->query($updateQuery);
+                    $query = "SELECT * FROM `stores`";
+                    $result = mysqli_query($db, $query);
                     echo "<table>
                             <tr>
                                 <td class='title'>ID</td>
@@ -33,8 +33,10 @@
                                 <td class='title'>Artist</td>
                                 <td class='title'>Product</td>
                             </tr>";
-                    while( $data = $execUpdate->fetch() ){
-                        echo "<tr><td>".$data['id']."</td><td>".$data['naame']."</td><td>".$data['artist']."</td><td>".$data['products']."</td></tr>";
+                    if(mysqli_num_rows($result)>0){
+                        while( $data = mysqli_fetch_assoc($result) ){
+                            echo "<tr><td>".$data['id']."</td><td>".$data['naame']."</td><td>".$data['artist']."</td><td>".$data['products']."</td></tr>";
+                        }
                     }
                     echo "</table>";
                 }
