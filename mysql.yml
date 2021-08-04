@@ -1,1 +1,20 @@
+version: '3'
 
+services:
+  mysql-db:
+    image: mysql:5.6
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: '0215'
+      MYSQL_DATABASE: 'demoDB'
+    ports:
+      - 3306:3306
+    networks:
+      - mysql-net
+    volumes:
+      - ./dbcontent:/docker-entrypoint-initdb.d
+    
+networks:
+  mysql-net:
+    driver: bridge
