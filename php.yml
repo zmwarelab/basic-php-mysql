@@ -1,1 +1,6 @@
-
+version: '3'
+services:
+  php:
+    build: .
+    ports:
+      - 8000:80
